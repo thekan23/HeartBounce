@@ -12,6 +12,8 @@
 		FC5501792155593E00B05056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5501772155593E00B05056 /* Main.storyboard */; };
 		FC55017B2155593F00B05056 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC55017A2155593F00B05056 /* Assets.xcassets */; };
 		FC55017E2155593F00B05056 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC55017C2155593F00B05056 /* LaunchScreen.storyboard */; };
+		FC55018721555CD100B05056 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC55018621555CD100B05056 /* RxSwift.framework */; };
+		FC55018921555CDF00B05056 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC55018821555CDF00B05056 /* SnapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		FC55017A2155593F00B05056 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC55017D2155593F00B05056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC55017F2155593F00B05056 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC55018621555CD100B05056 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		FC55018821555CDF00B05056 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC55018921555CDF00B05056 /* SnapKit.framework in Frameworks */,
+				FC55018721555CD100B05056 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +46,7 @@
 			children = (
 				FC5501722155593E00B05056 /* HeartBounce */,
 				FC5501712155593E00B05056 /* Products */,
+				FC55018521555CD100B05056 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,15 @@
 			path = HeartBounce;
 			sourceTree = "<group>";
 		};
+		FC55018521555CD100B05056 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC55018821555CDF00B05056 /* SnapKit.framework */,
+				FC55018621555CD100B05056 /* RxSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +90,7 @@
 				FC55016C2155593E00B05056 /* Sources */,
 				FC55016D2155593E00B05056 /* Frameworks */,
 				FC55016E2155593E00B05056 /* Resources */,
+				FC55018C21555E0500B05056 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -129,6 +146,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		FC55018C21555E0500B05056 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		FC55016C2155593E00B05056 /* Sources */ = {
@@ -284,6 +323,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUER35A27W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HeartBounce/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -302,6 +345,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LUER35A27W;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HeartBounce/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
