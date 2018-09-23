@@ -13,7 +13,7 @@ import UIKit
 class HeartBounceViewModel {
     
     enum ViewAction {
-        case updateFingerPositions([Finger])
+        case updateFingerPositions
     }
     
     enum State {
@@ -22,21 +22,30 @@ class HeartBounceViewModel {
         case ended
     }
     
+    let viewAction = PublishSubject<ViewAction>()
     let fingers = Variable<[Finger]>([])
     let state = Variable<State>(.wait)
+    let fingerProducer = FingerProducer()
     
     func requestAppendFinger(at pointt: CGPoint, with identifier: String) {
         guard fingers.value.contains(where: { $0.identifier == identifier }) else {
             return
         }
-        
+        let finger = fingerProducer.produce(identifier: identifier, point: pointt)
+        fingers.value.append(finger)
+        viewAction.onNext(.updateFingerPositions())
     }
     
     func requestUpdateFinger(at point: CGPoint, with identifier: String) {
-        
+        guard let fingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
+            return
+        }
+        fingers.value[fingerIndex].currentPoint = point
+        viewAction.onNext(.updateFingerPositions())
     }
     
     func leaveFinger(with identifier: String) {
-        
+        fingers.value.removeAll(where: { $0.identifier == identifier })
+        viewAction.onNext(.updateFingerPositions())
     }
 }

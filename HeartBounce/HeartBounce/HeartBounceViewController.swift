@@ -14,61 +14,57 @@ class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
     
     var viewModel: HeartBounceViewModel!
+    let disposeBag = DisposeBag()
     
     func bindViewModel() {
-        
+        bindViewAction()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.isNavigationBarHidden = true
     }
-    
-    var positions: [CGPoint] = []
-    var colors: [UIColor] = [.red, .blue]
-    var views: [UIView] = []
-    
-    var numberOfFingers: Int {
-        return positions.count
-    }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: view)
-            positions.append(location)
-            configureCircleView(at: location)
-            print("began: \(String(format: "%p", t))")
-        }
-    }
-    
-    private func configureCircleView(at point: CGPoint) {
-        let v = UIView(frame: CGRect(origin: point, size: CGSize(width: 60, height: 60)))
-        v.backgroundColor = .red
-        v.layer.cornerRadius = 30
-        v.layer.masksToBounds = true
-        
-        views.append(v)
-        view.addSubview(v)
-        
-        v.snp.makeConstraints {
-            $0.center.equalTo(point)
-            $0.width.equalTo(60)
-            $0.height.equalTo(60)
+            let identifier = String(format: "%p", t)
+            viewModel.requestAppendFinger(at: location, with: identifier)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            print("moved: \(String(format: "%p", t))")
+            let location = t.location(in: view)
+            let identifier = String(format: "%p", t)
+            viewModel.requestUpdateFinger(at: location, with: identifier)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches ended")
+        for t in touches {
+            let identifier = String(format: "%p", t)
+            viewModel.leaveFinger(with: identifier)
+        }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("touches cancel")
+        for t in touches {
+            let identifier = String(format: "%p", t)
+            viewModel.leaveFinger(with: identifier)
+        }
+    }
+}
+
+extension HeartBounceViewController {
+    private func bindViewAction() {
+        viewModel.viewAction
+            .subscribe(onNext: { [weak self] in
+                switch $0 {
+                case .updateFingerPositions:
+                    
+                }
+            }).disposed(by: disposeBag)
     }
 }
 
