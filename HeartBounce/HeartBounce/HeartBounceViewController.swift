@@ -19,6 +19,11 @@ class HeartBounceViewController: UIViewController, Bindable {
         
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationController?.isNavigationBarHidden = true
+    }
+    
     var positions: [CGPoint] = []
     var colors: [UIColor] = [.red, .blue]
     var views: [UIView] = []

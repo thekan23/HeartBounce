@@ -11,6 +11,10 @@ import UIKit
 
 class RootViewController: UIViewController {
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
