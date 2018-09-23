@@ -37,6 +37,7 @@ class HeartBounceViewController: UIViewController, Bindable {
             let location = t.location(in: view)
             positions.append(location)
             configureCircleView(at: location)
+            print("began: \(String(format: "%p", t))")
         }
     }
     
@@ -58,15 +59,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            let point = t.location(in: view)
-            guard let index = positions.firstIndex(of: point) else {
-                return
-            }
-            positions[index] = point
-            let v = views[index]
-            v.snp.updateConstraints {
-                $0.center.equalTo(point)
-            }
+            print("moved: \(String(format: "%p", t))")
         }
     }
     

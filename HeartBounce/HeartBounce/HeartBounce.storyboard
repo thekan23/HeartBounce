@@ -13,7 +13,7 @@
         <scene sceneID="nxc-Pj-cXp">
             <objects>
                 <viewController storyboardIdentifier="HeartBounce" id="FCe-9o-L3U" customClass="HeartBounceViewController" customModule="HeartBounce" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="gAG-i2-1Gc">
+                    <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gAG-i2-1Gc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

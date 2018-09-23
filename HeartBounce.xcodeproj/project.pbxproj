@@ -18,6 +18,9 @@
 		FCF9B7572157902600807ADC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7562157902600807ADC /* Bindable.swift */; };
 		FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B759215791FC00807ADC /* RootViewController.swift */; };
 		FCF9B75C2157925500807ADC /* HeartBounce.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF9B75B2157925500807ADC /* HeartBounce.storyboard */; };
+		FCF9B75E215796A000807ADC /* Finger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75D215796A000807ADC /* Finger.swift */; };
+		FCF9B76021579BB800807ADC /* FingerProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75F21579BB800807ADC /* FingerProducer.swift */; };
+		FCF9B76321579D9200807ADC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B76221579D9200807ADC /* UIColor+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +37,9 @@
 		FCF9B7562157902600807ADC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		FCF9B759215791FC00807ADC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		FCF9B75B2157925500807ADC /* HeartBounce.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HeartBounce.storyboard; sourceTree = "<group>"; };
+		FCF9B75D215796A000807ADC /* Finger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finger.swift; sourceTree = "<group>"; };
+		FCF9B75F21579BB800807ADC /* FingerProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerProducer.swift; sourceTree = "<group>"; };
+		FCF9B76221579D9200807ADC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,7 @@
 				FC55017F2155593F00B05056 /* Info.plist */,
 				FCF9B758215791D600807ADC /* HeartBounce */,
 				FCF9B7552157901D00807ADC /* Util */,
+				FCF9B76121579D8000807ADC /* Extension */,
 			);
 			path = HeartBounce;
 			sourceTree = "<group>";
@@ -94,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				FCF9B7562157902600807ADC /* Bindable.swift */,
+				FCF9B75F21579BB800807ADC /* FingerProducer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -104,8 +112,17 @@
 				FCF9B75B2157925500807ADC /* HeartBounce.storyboard */,
 				FC5501752155593E00B05056 /* HeartBounceViewController.swift */,
 				FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */,
+				FCF9B75D215796A000807ADC /* Finger.swift */,
 			);
 			path = HeartBounce;
+			sourceTree = "<group>";
+		};
+		FCF9B76121579D8000807ADC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FCF9B76221579D9200807ADC /* UIColor+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,7 +224,10 @@
 				FCF9B7572157902600807ADC /* Bindable.swift in Sources */,
 				FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */,
 				FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */,
+				FCF9B75E215796A000807ADC /* Finger.swift in Sources */,
 				FC5501742155593E00B05056 /* AppDelegate.swift in Sources */,
+				FCF9B76021579BB800807ADC /* FingerProducer.swift in Sources */,
+				FCF9B76321579D9200807ADC /* UIColor+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
