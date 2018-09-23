@@ -8,24 +8,32 @@
 
 /* Begin PBXBuildFile section */
 		FC5501742155593E00B05056 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501732155593E00B05056 /* AppDelegate.swift */; };
-		FC5501762155593E00B05056 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501752155593E00B05056 /* ViewController.swift */; };
+		FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501752155593E00B05056 /* HeartBounceViewController.swift */; };
 		FC5501792155593E00B05056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5501772155593E00B05056 /* Main.storyboard */; };
 		FC55017B2155593F00B05056 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC55017A2155593F00B05056 /* Assets.xcassets */; };
 		FC55017E2155593F00B05056 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC55017C2155593F00B05056 /* LaunchScreen.storyboard */; };
 		FC55018721555CD100B05056 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC55018621555CD100B05056 /* RxSwift.framework */; };
 		FC55018921555CDF00B05056 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC55018821555CDF00B05056 /* SnapKit.framework */; };
+		FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */; };
+		FCF9B7572157902600807ADC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7562157902600807ADC /* Bindable.swift */; };
+		FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B759215791FC00807ADC /* RootViewController.swift */; };
+		FCF9B75C2157925500807ADC /* HeartBounce.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FCF9B75B2157925500807ADC /* HeartBounce.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FC5501702155593E00B05056 /* HeartBounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartBounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5501732155593E00B05056 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		FC5501752155593E00B05056 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		FC5501752155593E00B05056 /* HeartBounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceViewController.swift; sourceTree = "<group>"; };
 		FC5501782155593E00B05056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FC55017A2155593F00B05056 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC55017D2155593F00B05056 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC55017F2155593F00B05056 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC55018621555CD100B05056 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		FC55018821555CDF00B05056 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceViewModel.swift; sourceTree = "<group>"; };
+		FCF9B7562157902600807ADC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
+		FCF9B759215791FC00807ADC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		FCF9B75B2157925500807ADC /* HeartBounce.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HeartBounce.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,11 +70,13 @@
 			isa = PBXGroup;
 			children = (
 				FC5501732155593E00B05056 /* AppDelegate.swift */,
-				FC5501752155593E00B05056 /* ViewController.swift */,
+				FCF9B759215791FC00807ADC /* RootViewController.swift */,
 				FC5501772155593E00B05056 /* Main.storyboard */,
 				FC55017A2155593F00B05056 /* Assets.xcassets */,
 				FC55017C2155593F00B05056 /* LaunchScreen.storyboard */,
 				FC55017F2155593F00B05056 /* Info.plist */,
+				FCF9B758215791D600807ADC /* HeartBounce */,
+				FCF9B7552157901D00807ADC /* Util */,
 			);
 			path = HeartBounce;
 			sourceTree = "<group>";
@@ -78,6 +88,24 @@
 				FC55018621555CD100B05056 /* RxSwift.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCF9B7552157901D00807ADC /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				FCF9B7562157902600807ADC /* Bindable.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
+		FCF9B758215791D600807ADC /* HeartBounce */ = {
+			isa = PBXGroup;
+			children = (
+				FCF9B75B2157925500807ADC /* HeartBounce.storyboard */,
+				FC5501752155593E00B05056 /* HeartBounceViewController.swift */,
+				FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */,
+			);
+			path = HeartBounce;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC55017E2155593F00B05056 /* LaunchScreen.storyboard in Resources */,
+				FCF9B75C2157925500807ADC /* HeartBounce.storyboard in Resources */,
 				FC55017B2155593F00B05056 /* Assets.xcassets in Resources */,
 				FC5501792155593E00B05056 /* Main.storyboard in Resources */,
 			);
@@ -174,7 +203,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC5501762155593E00B05056 /* ViewController.swift in Sources */,
+				FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */,
+				FCF9B7572157902600807ADC /* Bindable.swift in Sources */,
+				FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */,
+				FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */,
 				FC5501742155593E00B05056 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

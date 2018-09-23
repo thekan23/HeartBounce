@@ -9,19 +9,63 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Root View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HeartBounce" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="RootViewController" customModule="HeartBounce" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnv-TZ-Ch8">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="RZp-8m-sgc" kind="embed" identifier="HeartBounce" id="hAV-C0-Zzi"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="lnv-TZ-Ch8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2cb-SQ-nQp"/>
+                            <constraint firstAttribute="bottom" secondItem="lnv-TZ-Ch8" secondAttribute="bottom" id="HJX-rq-lXd"/>
+                            <constraint firstItem="lnv-TZ-Ch8" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="tdu-he-8n9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="lnv-TZ-Ch8" secondAttribute="trailing" id="uFv-LA-wte"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="g4s-cz-i7V"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="468" y="652.62368815592208"/>
+        </scene>
+        <!--HeartBounce-->
+        <scene sceneID="eVL-M7-dcb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="HeartBounce" referencedIdentifier="HeartBounce" id="9Wm-V9-qbw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="PT1-Jo-fBr"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MTu-bf-zT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1902" y="652"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="C5s-eD-UeL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RZp-8m-sgc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mkv-3Z-PjC">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9Wm-V9-qbw" kind="relationship" relationship="rootViewController" id="xNW-ij-H2U"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KZA-Ab-JIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1305" y="653"/>
         </scene>
     </scenes>
 </document>
