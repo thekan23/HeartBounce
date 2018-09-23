@@ -14,6 +14,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
     
     var viewModel: HeartBounceViewModel!
+    var fingerIndicatorMap: [String: UIView] = [:]
     let disposeBag = DisposeBag()
     
     func bindViewModel() {
@@ -61,8 +62,9 @@ extension HeartBounceViewController {
         viewModel.viewAction
             .subscribe(onNext: { [weak self] in
                 switch $0 {
+                case .createFinger:
                 case .updateFingerPositions:
-                    
+                case .leaveFinger:
                 }
             }).disposed(by: disposeBag)
     }
