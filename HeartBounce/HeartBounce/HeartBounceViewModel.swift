@@ -19,6 +19,7 @@ class HeartBounceViewModel {
     }
     
     enum State {
+        case idle
         case wait
         case progress
         case ended
@@ -26,8 +27,14 @@ class HeartBounceViewModel {
     
     let viewAction = PublishSubject<ViewAction>()
     let fingers = Variable<[Finger]>([])
-    let state = Variable<State>(.wait)
+    let state = Variable<State>(.idle)
     let fingerProducer = FingerProducer()
+    let disposeBag = DisposeBag()
+    var timer = CountDownTimer(from: 5, to: 0)
+    
+    init() {
+
+    }
     
     func fingerForIdentifier(_ identifier: String) -> Finger? {
         guard let finger = fingers.value.first(where: { $0.identifier == identifier }) else {

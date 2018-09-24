@@ -29,30 +29,26 @@ class HeartBounceViewController: UIViewController, Bindable {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: view)
-            let identifier = String(format: "%p", t)
-            viewModel.requestAppendFinger(at: location, with: identifier)
+            viewModel.requestAppendFinger(at: location, with: t.identifier)
         }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
             let location = t.location(in: view)
-            let identifier = String(format: "%p", t)
-            viewModel.requestUpdateFinger(at: location, with: identifier)
+            viewModel.requestUpdateFinger(at: location, with: t.identifier)
         }
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            let identifier = String(format: "%p", t)
-            viewModel.leaveFinger(with: identifier)
+            viewModel.leaveFinger(with: t.identifier)
         }
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         for t in touches {
-            let identifier = String(format: "%p", t)
-            viewModel.leaveFinger(with: identifier)
+            viewModel.leaveFinger(with: t.identifier)
         }
     }
 }

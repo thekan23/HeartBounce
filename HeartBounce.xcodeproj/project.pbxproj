@@ -21,6 +21,8 @@
 		FCF9B75E215796A000807ADC /* Finger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75D215796A000807ADC /* Finger.swift */; };
 		FCF9B76021579BB800807ADC /* FingerProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75F21579BB800807ADC /* FingerProducer.swift */; };
 		FCF9B76321579D9200807ADC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B76221579D9200807ADC /* UIColor+Extension.swift */; };
+		FCF9B7652158B32B00807ADC /* UITouch+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7642158B32B00807ADC /* UITouch+Extension.swift */; };
+		FCF9B7672158BADA00807ADC /* CountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7662158BADA00807ADC /* CountDownTimer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		FCF9B75D215796A000807ADC /* Finger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Finger.swift; sourceTree = "<group>"; };
 		FCF9B75F21579BB800807ADC /* FingerProducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerProducer.swift; sourceTree = "<group>"; };
 		FCF9B76221579D9200807ADC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		FCF9B7642158B32B00807ADC /* UITouch+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITouch+Extension.swift"; sourceTree = "<group>"; };
+		FCF9B7662158BADA00807ADC /* CountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountDownTimer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			children = (
 				FCF9B7562157902600807ADC /* Bindable.swift */,
 				FCF9B75F21579BB800807ADC /* FingerProducer.swift */,
+				FCF9B7662158BADA00807ADC /* CountDownTimer.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -121,6 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				FCF9B76221579D9200807ADC /* UIColor+Extension.swift */,
+				FCF9B7642158B32B00807ADC /* UITouch+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -223,8 +229,10 @@
 				FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */,
 				FCF9B7572157902600807ADC /* Bindable.swift in Sources */,
 				FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */,
+				FCF9B7672158BADA00807ADC /* CountDownTimer.swift in Sources */,
 				FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */,
 				FCF9B75E215796A000807ADC /* Finger.swift in Sources */,
+				FCF9B7652158B32B00807ADC /* UITouch+Extension.swift in Sources */,
 				FC5501742155593E00B05056 /* AppDelegate.swift in Sources */,
 				FCF9B76021579BB800807ADC /* FingerProducer.swift in Sources */,
 				FCF9B76321579D9200807ADC /* UIColor+Extension.swift in Sources */,
