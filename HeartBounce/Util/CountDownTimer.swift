@@ -11,7 +11,7 @@ import RxSwift
 
 
 class CountDownTimer {
-    let timeout = PublishSubject<Void>()
+    let countDown = PublishSubject<Int>()
     var disposeBag = DisposeBag()
     
     private let from: Int
@@ -29,8 +29,8 @@ class CountDownTimer {
             .take(from - to + 1)
             .map { self.from - $0 }
         
-        timer?.subscribe(onNext: { [weak self] time in
-            self?.timeout.onNext(())
+        timer?.subscribe(onNext: { [weak self] count in
+            self?.countDown.onNext(count)
         }).disposed(by: disposeBag)
     }
     
@@ -42,8 +42,8 @@ class CountDownTimer {
             .take(from - to + 1)
             .map { self.from - $0 }
         
-        timer?.subscribe(onNext: { [weak self] time in
-            self?.timeout.onNext(())
+        timer?.subscribe(onNext: { [weak self] count in
+            self?.countDown.onNext(count)
         }).disposed(by: disposeBag)
     }
 }
