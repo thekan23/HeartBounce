@@ -87,14 +87,15 @@ extension HeartBounceViewController {
     }
     
     private func configureFinger(_ finger: Finger) -> UIView {
-        let size = CGSize(width: 60, height: 60)
+        let size = CGSize(width: 80, height: 80)
         let fingerIndicator = UIView()
         fingerIndicator.backgroundColor = finger.color
+        fingerIndicator.layer.cornerRadius = size.width / 2
+        fingerIndicator.layer.masksToBounds = true
         self.view.addSubview(fingerIndicator)
         fingerIndicator.snp.makeConstraints {
+            $0.size.equalTo(size)
             $0.center.equalTo(finger.currentPoint)
-            $0.width.equalTo(size.width)
-            $0.height.equalTo(size.height)
         }
         return fingerIndicator
     }
