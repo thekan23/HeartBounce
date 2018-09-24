@@ -61,12 +61,42 @@ extension HeartBounceViewController {
     private func bindViewAction() {
         viewModel.viewAction
             .subscribe(onNext: { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
                 switch $0 {
-                case .createFinger:
+                case .createFinger(let finger):
+                    let indicator = self.configureFinger(finger)
+                    self.fingerIndicatorMap[finger.identifier] = indicator
                 case .updateFingerPositions:
-                case .leaveFinger:
+                    self.fingerIndicatorMap.forEach { identifier, view in
+                        guard let point = self.viewModel.fingerForIdentifier(identifier)?.currentPoint else {
+                            return
+                        }
+                        view.snp.updateConstraints {
+                            $0.center.equalTo(point)
+                        }
+                    }
+                case .leaveFinger(let finger):
+                    guard let indicator = self.fingerIndicatorMap.removeValue(forKey: finger.identifier) else {
+                        return
+                    }
+                    indicator.removeFromSuperview()
                 }
             }).disposed(by: disposeBag)
+    }
+    
+    private func configureFinger(_ finger: Finger) -> UIView {
+        let size = CGSize(width: 60, height: 60)
+        let fingerIndicator = UIView()
+        fingerIndicator.backgroundColor = finger.color
+        self.view.addSubview(fingerIndicator)
+        fingerIndicator.snp.makeConstraints {
+            $0.center.equalTo(finger.currentPoint)
+            $0.width.equalTo(size.width)
+            $0.height.equalTo(size.height)
+        }
+        return fingerIndicator
     }
 }
 

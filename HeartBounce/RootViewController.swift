@@ -27,8 +27,7 @@ class RootViewController: UIViewController {
             guard let vc = segue.destination as? HeartBounceViewController else {
                 return
             }
-            let vm = HeartBounceViewModel()
-            vc.bindViewModel(to: vm)
+            vc.bindViewModel(to: HeartBounceViewModel())
         default:
             break
         }

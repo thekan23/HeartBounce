@@ -20,7 +20,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lnv-TZ-Ch8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <connections>
-                                    <segue destination="RZp-8m-sgc" kind="embed" identifier="HeartBounce" id="hAV-C0-Zzi"/>
+                                    <segue destination="9Wm-V9-qbw" kind="embed" identifier="HeartBounce" id="6x0-Ka-bOU"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -47,25 +47,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MTu-bf-zT1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1902" y="652"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="C5s-eD-UeL">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="RZp-8m-sgc" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Mkv-3Z-PjC">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="9Wm-V9-qbw" kind="relationship" relationship="rootViewController" id="xNW-ij-H2U"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="KZA-Ab-JIC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1305" y="653"/>
+            <point key="canvasLocation" x="1202" y="652"/>
         </scene>
     </scenes>
 </document>

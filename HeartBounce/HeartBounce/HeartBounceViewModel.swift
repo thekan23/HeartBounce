@@ -29,8 +29,15 @@ class HeartBounceViewModel {
     let state = Variable<State>(.wait)
     let fingerProducer = FingerProducer()
     
+    func fingerForIdentifier(_ identifier: String) -> Finger? {
+        guard let finger = fingers.value.first(where: { $0.identifier == identifier }) else {
+            return nil
+        }
+        return finger
+    }
+    
     func requestAppendFinger(at pointt: CGPoint, with identifier: String) {
-        guard fingers.value.contains(where: { $0.identifier == identifier }) else {
+        guard !fingers.value.contains(where: { $0.identifier == identifier }) else {
             return
         }
         let finger = fingerProducer.produce(identifier: identifier, point: pointt)
