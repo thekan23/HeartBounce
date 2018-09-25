@@ -23,18 +23,7 @@ class CountDownTimer {
         self.to = to
     }
     
-    func began() {
-        timer = Observable<Int>
-            .timer(0, period: 1, scheduler: MainScheduler.instance)
-            .take(from - to + 1)
-            .map { self.from - $0 }
-        
-        timer?.subscribe(onNext: { [weak self] count in
-            self?.countDown.onNext(count)
-        }).disposed(by: disposeBag)
-    }
-    
-    func update() {
+    func count() {
         disposeBag = DisposeBag()
         
         timer = Observable<Int>
