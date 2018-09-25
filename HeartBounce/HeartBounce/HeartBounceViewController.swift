@@ -19,6 +19,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     
     func bindViewModel() {
         bindViewAction()
+        bindState()
     }
     
     override func viewDidLoad() {
@@ -41,17 +42,11 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print("endedCount: \(touches.count)")
         for t in touches {
             viewModel.leaveFinger(with: t.identifier)
         }
     }
-    
-    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-        for t in touches {
-            viewModel.leaveFinger(with: t.identifier)
-        }
-    }
+
 }
 
 extension HeartBounceViewController {
@@ -83,10 +78,42 @@ extension HeartBounceViewController {
                     guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
                         return
                     }
+                    indicator.removeFromSuperview()
+                    
                     let order = self.viewModel.numberOfLeavedFingers
                     let leaveIndicator = self.configureLeaveIndicator(finger, order: order)
-                    indicator.removeFromSuperview()
                     self.fingerIndicatorMap[finger.identifier] = leaveIndicator
+                case .indicateCaughtFingers:
+                    let caughtFingers = self.viewModel.caughtFingers
+                    for finger in caughtFingers {
+                        guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
+                            continue
+                        }
+                        indicator.removeFromSuperview()
+                        
+                        let caughtIndicator = self.configureCaughtFinger(finger)
+                        self.fingerIndicatorMap[finger.identifier] = caughtIndicator
+                    }
+                }
+            }).disposed(by: disposeBag)
+    }
+    
+    private func bindState() {
+        viewModel.state.asObservable()
+            .subscribe(onNext: { [weak self] in
+                guard let `self` = self else {
+                    return
+                }
+                switch $0 {
+                case .idle:
+                    print("idle")
+                case .wait:
+                    print("wait")
+                case .progress:
+                    print("progress")
+                case .ended:
+                    print("ended")
+                    self.view.isUserInteractionEnabled = true
                 }
             }).disposed(by: disposeBag)
     }
@@ -118,6 +145,26 @@ extension HeartBounceViewController {
         }
         let orderLabel = UILabel()
         orderLabel.attributedText = NSAttributedString(string: "\(order)")
+        leaveIndicator.addSubview(orderLabel)
+        orderLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        return leaveIndicator
+    }
+    
+    private func configureCaughtFinger(_ finger: Finger) -> UIView {
+        let size = CGSize(width: 80, height: 80)
+        let leaveIndicator = UIView()
+        leaveIndicator.backgroundColor = finger.color
+        leaveIndicator.layer.cornerRadius = size.width / 2
+        leaveIndicator.layer.masksToBounds = true
+        view.addSubview(leaveIndicator)
+        leaveIndicator.snp.makeConstraints {
+            $0.size.equalTo(size)
+            $0.center.equalTo(finger.currentPoint)
+        }
+        let orderLabel = UILabel()
+        orderLabel.attributedText = NSAttributedString(string: "Caught")
         leaveIndicator.addSubview(orderLabel)
         orderLabel.snp.makeConstraints {
             $0.center.equalToSuperview()

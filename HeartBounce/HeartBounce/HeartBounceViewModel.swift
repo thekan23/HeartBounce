@@ -17,6 +17,7 @@ class HeartBounceViewModel {
         case updateFingerPositions
         case leaveFinger(Finger)
         case leaveFingerWithOrder(Finger)
+        case indicateCaughtFingers
     }
     
     enum State {
@@ -48,6 +49,10 @@ class HeartBounceViewModel {
         return fingers.value.filter { $0.state == .none }.count
     }
     
+    var caughtFingers: [Finger] {
+        return fingers.value.filter { $0.state == .caught }
+    }
+    
     init() {
         fingerEnterTimer.countDown
             .subscribe(onNext: { [weak self] count in
@@ -59,10 +64,8 @@ class HeartBounceViewModel {
                 }
                 if count == 0 {
                     if self.numberOfFingers > 0 {
-                        print("started")
                         self.state.value = .progress
                     } else {
-                        print("cancel")
                         self.state.value = .idle
                     }
                 }
@@ -122,7 +125,7 @@ class HeartBounceViewModel {
         viewAction.onNext(.leaveFinger(leavedFinger))
     }
     
-    private func processEndSequence() {
+    private func processMultipleLeaveEndSequence() {
         guard leavedFingersProxy.count >= 2 else {
             return
         }
@@ -133,6 +136,16 @@ class HeartBounceViewModel {
             fingers.value[index].state = .caught
         }
         state.value = .ended
+        viewAction.onNext(.indicateCaughtFingers)
+    }
+    
+    private func processLastOneEndSequence() {
+        guard numberOfUnleavedFingers <= 1, let index = fingers.value.firstIndex(where: { $0.state == .none }) else {
+            return
+        }
+        fingers.value[index].state = .caught
+        state.value = .ended
+        viewAction.onNext(.indicateCaughtFingers)
     }
     
     private func processNextSequence() {
@@ -154,7 +167,7 @@ class HeartBounceViewModel {
         leavedFingersProxy.append(leavedFinger)
         
         if fingerLeaveTimer == nil {
-            fingerLeaveTimer = MilliSecondCountDownTimer(from: 4, to: 0)
+            fingerLeaveTimer = MilliSecondCountDownTimer(from: 1, to: 0)
             fingerLeaveTimer?.count()
             fingerLeaveTimer?.timeout
                 .subscribe(onNext: { [weak self] in
@@ -162,17 +175,16 @@ class HeartBounceViewModel {
                         return
                     }
                     if self.leavedFingersProxy.count >= 2 {
-                        self.processEndSequence()
+                        self.processMultipleLeaveEndSequence()
                     } else {
                         self.processNextSequence()
+                    }
+                    if self.numberOfUnleavedFingers <= 1, self.state.value == .progress {
+                        self.processLastOneEndSequence()
                     }
                     self.fingerLeaveTimer = nil
                     self.leavedFingersProxy.removeAll()
                 }).disposed(by: disposeBag)
-        }
-        
-        if fingers.value.count <= 1 {
-            state.value = .ended
         }
     }
 }
