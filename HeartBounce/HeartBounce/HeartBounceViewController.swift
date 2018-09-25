@@ -101,7 +101,7 @@ extension HeartBounceViewController {
     
     private func bindState() {
         viewModel.state.asObservable()
-            .subscribe(onNext: { [weak self] in
+            .subscribe(onNext: { 
                 switch $0 {
                 case .idle:
                     print("idle")
