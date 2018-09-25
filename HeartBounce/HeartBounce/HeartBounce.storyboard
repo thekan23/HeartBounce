@@ -16,13 +16,28 @@
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gAG-i2-1Gc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddB-hi-qaP">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ddB-hi-qaP" secondAttribute="bottom" id="QhH-sI-TLv"/>
+                            <constraint firstItem="Mkf-PL-LGO" firstAttribute="trailing" secondItem="ddB-hi-qaP" secondAttribute="trailing" id="SzO-C0-s7y"/>
+                            <constraint firstItem="ddB-hi-qaP" firstAttribute="leading" secondItem="Mkf-PL-LGO" secondAttribute="leading" id="bR8-m4-QqK"/>
+                            <constraint firstItem="ddB-hi-qaP" firstAttribute="top" secondItem="gAG-i2-1Gc" secondAttribute="top" id="yxI-ih-6zS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Mkf-PL-LGO"/>
                     </view>
+                    <connections>
+                        <outlet property="surfaceView" destination="ddB-hi-qaP" id="V9c-qf-42C"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DfW-AJ-G0F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-145" y="69"/>
+            <point key="canvasLocation" x="-146.40000000000001" y="68.815592203898049"/>
         </scene>
     </scenes>
 </document>

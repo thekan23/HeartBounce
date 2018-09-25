@@ -13,6 +13,8 @@ import SnapKit
 class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
     
+    @IBOutlet weak var surfaceView: UIView!
+    
     var viewModel: HeartBounceViewModel!
     var fingerIndicatorMap: [String: UIView] = [:]
     let disposeBag = DisposeBag()
@@ -20,11 +22,6 @@ class HeartBounceViewController: UIViewController, Bindable {
     func bindViewModel() {
         bindViewAction()
         bindState()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        navigationController?.isNavigationBarHidden = true
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -35,6 +32,10 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if viewModel.state.value == .ended {
+            return
+        }
+        
         for t in touches {
             let location = t.location(in: view)
             viewModel.requestUpdateFinger(at: location, with: t.identifier)
@@ -113,7 +114,6 @@ extension HeartBounceViewController {
                     print("progress")
                 case .ended:
                     print("ended")
-                    self.view.isUserInteractionEnabled = true
                 }
             }).disposed(by: disposeBag)
     }
