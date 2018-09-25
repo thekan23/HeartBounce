@@ -31,7 +31,8 @@ class HeartBounceViewModel {
     let state = Variable<State>(.idle)
     let fingerProducer = FingerProducer()
     let disposeBag = DisposeBag()
-    let timer = CountDownTimer(from: 5, to: 0)
+    let fingerEnterTimer = SecondCountDownTimer(from: 3, to: 0)
+    let fingerLeaveTimer = MilliSecondCountDownTimer(from: 3, to: 0)
     
     var numberOfFingers: Int {
         return fingers.value.count
@@ -46,7 +47,7 @@ class HeartBounceViewModel {
     }
     
     init() {
-        timer.countDown
+        fingerEnterTimer.countDown
             .subscribe(onNext: { [weak self] count in
                 guard let `self` = self else {
                     return
@@ -88,7 +89,7 @@ class HeartBounceViewModel {
         let finger = fingerProducer.produce(identifier: identifier, point: pointt)
         fingers.value.append(finger)
         viewAction.onNext(.createFinger(finger))
-        timer.count()
+        fingerEnterTimer.count()
     }
     
     func requestUpdateFinger(at point: CGPoint, with identifier: String) {

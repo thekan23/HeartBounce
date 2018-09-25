@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 
-class CountDownTimer {
+class SecondCountDownTimer {
     let countDown = PublishSubject<Int>()
     var disposeBag = DisposeBag()
     

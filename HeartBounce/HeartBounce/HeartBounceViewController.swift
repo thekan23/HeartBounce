@@ -41,6 +41,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print("endedCount: \(touches.count)")
         for t in touches {
             viewModel.leaveFinger(with: t.identifier)
         }
