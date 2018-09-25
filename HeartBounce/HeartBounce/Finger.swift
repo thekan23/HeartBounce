@@ -14,4 +14,5 @@ struct Finger {
     let color: UIColor
     let identifier: String
     var currentPoint: CGPoint
+    var isLeaved: Bool = false
 }

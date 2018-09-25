@@ -32,10 +32,21 @@ class HeartBounceViewModel {
     let disposeBag = DisposeBag()
     let timer = CountDownTimer(from: 5, to: 0)
     
+    var numberOfFingers: Int {
+        return fingers.value.count
+    }
+    
+    var numberOfLeavedFingers: Int {
+        return fingers.value.filter { $0.isLeaved }.count
+    }
+    
+    var numberOfUnleavedFingers: Int {
+        return fingers.value.filter { !$0.isLeaved }.count
+    }
+    
     init() {
         timer.countDown
             .subscribe(onNext: { [weak self] count in
-                print("count: \(count)")
                 guard let `self` = self else {
                     return
                 }
@@ -43,7 +54,7 @@ class HeartBounceViewModel {
                     return
                 }
                 if count == 0 {
-                    print("game start")
+                    print("started")
                     self.state.value = .progress
                 }
             }).disposed(by: disposeBag)
@@ -83,10 +94,16 @@ class HeartBounceViewModel {
     }
     
     func leaveFinger(with identifier: String) {
-        guard let fingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
+        guard let leavedFingernIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
-        let finger = fingers.value.remove(at: fingerIndex)
-        viewAction.onNext(.leaveFinger(finger))
+        
+        fingers.value[leavedFingernIndex].isLeaved = true
+        let leavedFinger = fingers.value[leavedFingernIndex]
+        viewAction.onNext(.leaveFinger(leavedFinger))
+        
+        if fingers.value.count <= 1 {
+            state.value = .ended
+        }
     }
 }

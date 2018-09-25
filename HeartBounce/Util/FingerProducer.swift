@@ -14,7 +14,11 @@ class FingerProducer {
     var producedColors: [UIColor] = []
     
     func produce(identifier: String, point: CGPoint) -> Finger {
-        let finger = Finger(color: UIColor.random(), identifier: identifier, currentPoint: point)
+        let finger = Finger(
+            color: UIColor.random(),
+            identifier: identifier,
+            currentPoint: point,
+            isLeaved: false)
         return finger
     }
 }
