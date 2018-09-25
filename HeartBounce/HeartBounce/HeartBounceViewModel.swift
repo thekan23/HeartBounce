@@ -16,6 +16,7 @@ class HeartBounceViewModel {
         case createFinger(Finger)
         case updateFingerPositions
         case leaveFinger(Finger)
+        case leaveFingerWithOrder(Finger)
     }
     
     enum State {
@@ -54,8 +55,13 @@ class HeartBounceViewModel {
                     return
                 }
                 if count == 0 {
-                    print("started")
-                    self.state.value = .progress
+                    if self.numberOfFingers > 0 {
+                        print("started")
+                        self.state.value = .progress
+                    } else {
+                        print("cancel")
+                        self.state.value = .idle
+                    }
                 }
             }).disposed(by: disposeBag)
     }
@@ -94,13 +100,32 @@ class HeartBounceViewModel {
     }
     
     func leaveFinger(with identifier: String) {
-        guard let leavedFingernIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
+        switch state.value {
+        case .wait:
+            handleFingerLeaveWhenWait(identifier)
+        case .progress:
+            handleFingerLeaveWhenProgress(identifier)
+        default:
+            break
+        }
+    }
+    
+    private func handleFingerLeaveWhenWait(_ identifier: String) {
+        guard let leavedFingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
+            return
+        }
+        let leavedFinger = fingers.value.remove(at: leavedFingerIndex)
+        viewAction.onNext(.leaveFinger(leavedFinger))
+    }
+    
+    private func handleFingerLeaveWhenProgress(_ identifier: String) {
+        guard let leavedFingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
         
-        fingers.value[leavedFingernIndex].isLeaved = true
-        let leavedFinger = fingers.value[leavedFingernIndex]
-        viewAction.onNext(.leaveFinger(leavedFinger))
+        fingers.value[leavedFingerIndex].isLeaved = true
+        let leavedFinger = fingers.value[leavedFingerIndex]
+        viewAction.onNext(.leaveFingerWithOrder(leavedFinger))
         
         if fingers.value.count <= 1 {
             state.value = .ended

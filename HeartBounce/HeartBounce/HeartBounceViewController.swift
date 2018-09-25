@@ -74,6 +74,11 @@ extension HeartBounceViewController {
                         }
                     }
                 case .leaveFinger(let finger):
+                    guard let indicator = self.fingerIndicatorMap.removeValue(forKey: finger.identifier) else {
+                        return
+                    }
+                    indicator.removeFromSuperview()
+                case .leaveFingerWithOrder(let finger):
                     guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
                         return
                     }
