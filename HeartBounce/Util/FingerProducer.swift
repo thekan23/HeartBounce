@@ -18,7 +18,7 @@ class FingerProducer {
             color: UIColor.random(),
             identifier: identifier,
             currentPoint: point,
-            isLeaved: false)
+            state: .none)
         return finger
     }
 }

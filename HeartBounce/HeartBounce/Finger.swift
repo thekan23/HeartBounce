@@ -11,8 +11,13 @@ import UIKit
 
 
 struct Finger {
+    
+    enum State {
+        case none, leaved, caught
+    }
+    
     let color: UIColor
     let identifier: String
     var currentPoint: CGPoint
-    var isLeaved: Bool = false
+    var state: State = .none
 }

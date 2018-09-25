@@ -32,18 +32,20 @@ class HeartBounceViewModel {
     let fingerProducer = FingerProducer()
     let disposeBag = DisposeBag()
     let fingerEnterTimer = SecondCountDownTimer(from: 3, to: 0)
-    let fingerLeaveTimer = MilliSecondCountDownTimer(from: 3, to: 0)
+    var fingerLeaveTimer: MilliSecondCountDownTimer?
+    
+    var leavedFingersProxy: [Finger] = []
     
     var numberOfFingers: Int {
         return fingers.value.count
     }
     
     var numberOfLeavedFingers: Int {
-        return fingers.value.filter { $0.isLeaved }.count
+        return fingers.value.filter { $0.state == .leaved }.count
     }
     
     var numberOfUnleavedFingers: Int {
-        return fingers.value.filter { !$0.isLeaved }.count
+        return fingers.value.filter { $0.state == .none }.count
     }
     
     init() {
@@ -115,18 +117,59 @@ class HeartBounceViewModel {
         guard let leavedFingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
+        
         let leavedFinger = fingers.value.remove(at: leavedFingerIndex)
         viewAction.onNext(.leaveFinger(leavedFinger))
+    }
+    
+    private func processEndSequence() {
+        guard leavedFingersProxy.count >= 2 else {
+            return
+        }
+        for leavedFinger in leavedFingersProxy {
+            guard let index = fingers.value.firstIndex(where: { $0.identifier == leavedFinger.identifier }) else {
+                continue
+            }
+            fingers.value[index].state = .caught
+        }
+        state.value = .ended
+    }
+    
+    private func processNextSequence() {
+        guard
+            leavedFingersProxy.count < 2, let identifier = leavedFingersProxy.first?.identifier,
+            let fingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
+                return
+        }
+        fingers.value[fingerIndex].state = .leaved
+        let leavedFinger = fingers.value[fingerIndex]
+        viewAction.onNext(.leaveFingerWithOrder(leavedFinger))
     }
     
     private func handleFingerLeaveWhenProgress(_ identifier: String) {
         guard let leavedFingerIndex = fingers.value.firstIndex(where: { $0.identifier == identifier }) else {
             return
         }
-        
-        fingers.value[leavedFingerIndex].isLeaved = true
         let leavedFinger = fingers.value[leavedFingerIndex]
-        viewAction.onNext(.leaveFingerWithOrder(leavedFinger))
+        leavedFingersProxy.append(leavedFinger)
+        
+        if fingerLeaveTimer == nil {
+            fingerLeaveTimer = MilliSecondCountDownTimer(from: 4, to: 0)
+            fingerLeaveTimer?.count()
+            fingerLeaveTimer?.timeout
+                .subscribe(onNext: { [weak self] in
+                    guard let `self` = self else {
+                        return
+                    }
+                    if self.leavedFingersProxy.count >= 2 {
+                        self.processEndSequence()
+                    } else {
+                        self.processNextSequence()
+                    }
+                    self.fingerLeaveTimer = nil
+                    self.leavedFingersProxy.removeAll()
+                }).disposed(by: disposeBag)
+        }
         
         if fingers.value.count <= 1 {
             state.value = .ended
