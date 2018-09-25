@@ -24,6 +24,7 @@
 		FCF9B7652158B32B00807ADC /* UITouch+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7642158B32B00807ADC /* UITouch+Extension.swift */; };
 		FCF9B7672158BADA00807ADC /* SecondCountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7662158BADA00807ADC /* SecondCountDownTimer.swift */; };
 		FCF9B769215A082D00807ADC /* MilliSecondCountDownTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B768215A082D00807ADC /* MilliSecondCountDownTimer.swift */; };
+		FCF9B76B215A9E1C00807ADC /* Vibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B76A215A9E1C00807ADC /* Vibration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		FCF9B7642158B32B00807ADC /* UITouch+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITouch+Extension.swift"; sourceTree = "<group>"; };
 		FCF9B7662158BADA00807ADC /* SecondCountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCountDownTimer.swift; sourceTree = "<group>"; };
 		FCF9B768215A082D00807ADC /* MilliSecondCountDownTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilliSecondCountDownTimer.swift; sourceTree = "<group>"; };
+		FCF9B76A215A9E1C00807ADC /* Vibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 				FCF9B75F21579BB800807ADC /* FingerProducer.swift */,
 				FCF9B7662158BADA00807ADC /* SecondCountDownTimer.swift */,
 				FCF9B768215A082D00807ADC /* MilliSecondCountDownTimer.swift */,
+				FCF9B76A215A9E1C00807ADC /* Vibration.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCF9B76B215A9E1C00807ADC /* Vibration.swift in Sources */,
 				FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */,
 				FCF9B7572157902600807ADC /* Bindable.swift in Sources */,
 				FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */,

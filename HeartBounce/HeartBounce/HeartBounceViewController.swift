@@ -101,15 +101,17 @@ extension HeartBounceViewController {
     
     private func bindState() {
         viewModel.state.asObservable()
-            .subscribe(onNext: { 
+            .subscribe(onNext: {
                 switch $0 {
                 case .idle:
                     print("idle")
                 case .wait:
                     print("wait")
                 case .progress:
+                    Vibration.medium.vibrate()
                     print("progress")
                 case .ended:
+                    Vibration.heavy.vibrate()
                     print("ended")
                 }
             }).disposed(by: disposeBag)
