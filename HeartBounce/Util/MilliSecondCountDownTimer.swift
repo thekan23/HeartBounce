@@ -25,7 +25,7 @@ class MilliSecondCountDownTimer {
     
     func startCountdown() {
         timer = Observable<Int>
-            .timer(0, period: 0.5, scheduler: MainScheduler.instance)
+            .timer(0, period: 0.05, scheduler: MainScheduler.instance)
             .take(from - to + 1)
             .map { self.from - $0 }
         
