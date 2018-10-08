@@ -79,13 +79,20 @@ extension HeartBounceViewController {
                     indicator.stopAnimation()
                     indicator.removeFromSuperview()
                 case .leaveFingerWithOrder(let finger):
-                    guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
+                    guard let indicator = self.fingerIndicatorMap.removeValue(forKey: finger.identifier) else {
                         return
                     }
                     indicator.stopAnimation()
                     indicator.removeFromSuperview()
                 case .indicateCaughtFingers:
-                    print("Caught Fingers")
+                    let caughtFingers = self.viewModel.caughtFingers
+                    print("caught count: \(caughtFingers.count)")
+                    for (key, indicator) in self.fingerIndicatorMap {
+                        if caughtFingers.contains(where: { $0.identifier != key }) {
+                            indicator.stopAnimation()
+                            indicator.removeFromSuperview()
+                        }
+                    }
                 }
             }).disposed(by: disposeBag)
     }
@@ -109,10 +116,11 @@ extension HeartBounceViewController {
     }
     
     private func configureFingerIndicator(_ finger: Finger) -> HeartBounceView {
+        let frameSize = CGSize(width: 120, height: 120)
         let fingerIndicator = HeartBounceView(color: finger.color)
         view.addSubview(fingerIndicator)
         fingerIndicator.snp.makeConstraints {
-            $0.size.equalTo(HeartBounceView.externalFrame.size)
+            $0.size.equalTo(frameSize)
             $0.center.equalTo(finger.currentPoint)
         }
         return fingerIndicator

@@ -168,8 +168,8 @@ class HeartBounceViewModel {
         
         if fingerLeaveTimer == nil {
             fingerLeaveTimer = MilliSecondCountDownTimer(from: 1, to: 0)
-            fingerLeaveTimer?.count()
-            fingerLeaveTimer?.timeout
+            fingerLeaveTimer?.startCountdown()
+            fingerLeaveTimer?.onTimeout
                 .subscribe(onNext: { [weak self] in
                     guard let `self` = self else {
                         return
@@ -179,6 +179,7 @@ class HeartBounceViewModel {
                     } else {
                         self.processNextSequence()
                     }
+                    
                     if self.numberOfUnleavedFingers <= 1, self.state.value == .progress {
                         self.processLastOneEndSequence()
                     }

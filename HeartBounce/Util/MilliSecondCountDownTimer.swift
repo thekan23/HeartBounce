@@ -11,7 +11,7 @@ import RxSwift
 
 
 class MilliSecondCountDownTimer {
-    let timeout = PublishSubject<Void>()
+    let onTimeout = PublishSubject<Void>()
     let disposeBag = DisposeBag()
     
     private let from: Int
@@ -23,15 +23,15 @@ class MilliSecondCountDownTimer {
         self.to = to
     }
     
-    func count() {
+    func startCountdown() {
         timer = Observable<Int>
-            .timer(0, period: 0.1, scheduler: MainScheduler.instance)
+            .timer(0, period: 0.5, scheduler: MainScheduler.instance)
             .take(from - to + 1)
             .map { self.from - $0 }
         
         timer?.subscribe(onNext: { [weak self] count in
             if count == 0 {
-                self?.timeout.onNext(())
+                self?.onTimeout.onNext(())
             }
         }).disposed(by: disposeBag)
     }
