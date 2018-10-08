@@ -88,8 +88,13 @@ extension HeartBounceViewController {
                     let caughtFingers = self.viewModel.caughtFingers
                     print("caught count: \(caughtFingers.count)")
                     for (key, indicator) in self.fingerIndicatorMap {
-                        if caughtFingers.contains(where: { $0.identifier != key }) {
-                            indicator.stopAnimation()
+                        var isMatched = false
+                        for caughtFinger in caughtFingers {
+                            if caughtFinger.identifier == key {
+                                isMatched = true
+                            }
+                        }
+                        if !isMatched {
                             indicator.removeFromSuperview()
                         }
                     }
