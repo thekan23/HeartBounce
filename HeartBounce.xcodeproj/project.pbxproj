@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC42C2A3216B944C006DA18C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C2A2216B944C006DA18C /* NVActivityIndicatorView.framework */; };
 		FC42C2A7216B988E006DA18C /* HeartBounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C2A6216B988E006DA18C /* HeartBounceView.swift */; };
+		FC42C2AB216BC74B006DA18C /* FiraSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC42C2AA216BC74B006DA18C /* FiraSans-Bold.ttf */; };
 		FC5501742155593E00B05056 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501732155593E00B05056 /* AppDelegate.swift */; };
 		FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501752155593E00B05056 /* HeartBounceViewController.swift */; };
 		FC5501792155593E00B05056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5501772155593E00B05056 /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 /* Begin PBXFileReference section */
 		FC42C2A2216B944C006DA18C /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
 		FC42C2A6216B988E006DA18C /* HeartBounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceView.swift; sourceTree = "<group>"; };
+		FC42C2AA216BC74B006DA18C /* FiraSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "FiraSans-Bold.ttf"; path = "../../../../mercury/Mercury/Resources/Font/FiraSans-Bold.ttf"; sourceTree = "<group>"; };
 		FC5501702155593E00B05056 /* HeartBounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartBounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5501732155593E00B05056 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5501752155593E00B05056 /* HeartBounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC42C2A8216BC704006DA18C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				FC42C2A9216BC716006DA18C /* Font */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		FC42C2A9216BC716006DA18C /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				FC42C2AA216BC74B006DA18C /* FiraSans-Bold.ttf */,
+			);
+			path = Font;
+			sourceTree = "<group>";
+		};
 		FC5501672155593E00B05056 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +115,7 @@
 				FCF9B758215791D600807ADC /* HeartBounce */,
 				FCF9B7552157901D00807ADC /* Util */,
 				FCF9B76121579D8000807ADC /* Extension */,
+				FC42C2A8216BC704006DA18C /* Resource */,
 			);
 			path = HeartBounce;
 			sourceTree = "<group>";
@@ -207,6 +226,7 @@
 				FCF9B75C2157925500807ADC /* HeartBounce.storyboard in Resources */,
 				FC55017B2155593F00B05056 /* Assets.xcassets in Resources */,
 				FC5501792155593E00B05056 /* Main.storyboard in Resources */,
+				FC42C2AB216BC74B006DA18C /* FiraSans-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
     
     @IBOutlet weak var surfaceView: UIView!
+    @IBOutlet weak var displayGameStateLabel: UILabel!
     
     var viewModel: HeartBounceViewModel!
     var fingerIndicatorMap: [String: HeartBounceView] = [:]
@@ -85,41 +86,39 @@ extension HeartBounceViewController {
                     indicator.stopAnimation()
                     indicator.removeFromSuperview()
                 case .indicateCaughtFingers:
-                    let caughtFingers = self.viewModel.caughtFingers
-                    print("caught count: \(caughtFingers.count)")
-                    for (key, indicator) in self.fingerIndicatorMap {
-                        var isMatched = false
-                        for caughtFinger in caughtFingers {
-                            if caughtFinger.identifier == key {
-                                isMatched = true
-                            }
-                        }
-                        if !isMatched {
-                            indicator.removeFromSuperview()
-                        }
-                    }
+                    self.removeAllExceptCaughtFingers()
                 }
             }).disposed(by: disposeBag)
     }
     
     private func bindState() {
         viewModel.state.asObservable()
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else {
+                    return
+                }
                 switch $0 {
                 case .idle:
-                    print("idle")
+                    self.displayGameStateLabel.text = "Wait"
                 case .wait:
-                    print("wait")
+                    self.viewModel.fingerEnterTimer.countDown
+                        .subscribe(onNext: { countDown in
+                            if self.viewModel.state.value == .wait {
+                                self.displayGameStateLabel.text = String(countDown)
+                            }
+                        }).disposed(by: self.disposeBag)
                 case .progress:
+                    self.displayGameStateLabel.text = "Start"
                     Vibration.medium.vibrate()
-                    print("progress")
                 case .ended:
+                    self.displayGameStateLabel.text = "Finish"
                     Vibration.heavy.vibrate()
-                    print("ended")
                 }
             }).disposed(by: disposeBag)
     }
-    
+}
+
+extension HeartBounceViewController {
     private func configureFingerIndicator(_ finger: Finger) -> HeartBounceView {
         let frameSize = CGSize(width: 120, height: 120)
         let fingerIndicator = HeartBounceView(color: finger.color)
@@ -129,6 +128,21 @@ extension HeartBounceViewController {
             $0.center.equalTo(finger.currentPoint)
         }
         return fingerIndicator
+    }
+    
+    private func removeAllExceptCaughtFingers() {
+        let caughtFingers = self.viewModel.caughtFingers
+        for (key, indicator) in self.fingerIndicatorMap {
+            var isMatched = false
+            for caughtFinger in caughtFingers {
+                if caughtFinger.identifier == key {
+                    isMatched = true
+                }
+            }
+            if !isMatched {
+                indicator.removeFromSuperview()
+            }
+        }
     }
 }
 

@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="FiraSans-Bold.ttf">
+            <string>FiraSans-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Heart Bounce View Controller-->
         <scene sceneID="nxc-Pj-cXp">
@@ -19,7 +24,23 @@
                         <subviews>
                             <view multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ddB-hi-qaP">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wait" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fmR-Kg-Alr">
+                                        <rect key="frame" x="30" y="20" width="315" height="22"/>
+                                        <fontDescription key="fontDescription" name="FiraSans-Bold" family="Fira Sans" pointSize="18"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="fmR-Kg-Alr" firstAttribute="leading" secondItem="ddB-hi-qaP" secondAttribute="leading" constant="30" id="3nV-r2-SPu"/>
+                                    <constraint firstAttribute="trailing" secondItem="fmR-Kg-Alr" secondAttribute="trailing" constant="30" id="6U2-DE-5KI"/>
+                                    <constraint firstItem="fmR-Kg-Alr" firstAttribute="top" secondItem="ddB-hi-qaP" secondAttribute="top" constant="20" id="QA7-jb-4jN"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -32,6 +53,7 @@
                         <viewLayoutGuide key="safeArea" id="Mkf-PL-LGO"/>
                     </view>
                     <connections>
+                        <outlet property="displayGameStateLabel" destination="fmR-Kg-Alr" id="GcV-Au-xyB"/>
                         <outlet property="surfaceView" destination="ddB-hi-qaP" id="V9c-qf-42C"/>
                     </connections>
                 </viewController>
