@@ -54,22 +54,7 @@ class HeartBounceViewModel {
     }
     
     init() {
-        fingerEnterTimer.countDown
-            .subscribe(onNext: { [weak self] count in
-                guard let `self` = self else {
-                    return
-                }
-                guard self.state.value == .wait else {
-                    return
-                }
-                if count == 0 {
-                    if self.numberOfFingers > 0 {
-                        self.state.value = .progress
-                    } else {
-                        self.state.value = .idle
-                    }
-                }
-            }).disposed(by: disposeBag)
+        restart()
     }
     
     func fingerForIdentifier(_ identifier: String) -> Finger? {
@@ -114,6 +99,25 @@ class HeartBounceViewModel {
         default:
             break
         }
+    }
+    
+    func restart() {
+        fingerEnterTimer.countDown
+            .subscribe(onNext: { [weak self] count in
+                guard let `self` = self else {
+                    return
+                }
+                guard self.state.value == .wait else {
+                    return
+                }
+                if count == 0 {
+                    if self.numberOfFingers > 0 {
+                        self.state.value = .progress
+                    } else {
+                        self.state.value = .idle
+                    }
+                }
+            }).disposed(by: disposeBag)
     }
     
     private func handleFingerLeaveWhenWait(_ identifier: String) {

@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import SnapKit
+import RxCocoa
 import NVActivityIndicatorView
 
 class HeartBounceViewController: UIViewController, Bindable {
@@ -16,14 +17,22 @@ class HeartBounceViewController: UIViewController, Bindable {
     
     @IBOutlet weak var surfaceView: UIView!
     @IBOutlet weak var displayGameStateLabel: UILabel!
+    @IBOutlet weak var finishAndRestartView: UIView!
+    @IBOutlet weak var restartButton: UIButton!
     
     var viewModel: HeartBounceViewModel!
     var fingerIndicatorMap: [String: HeartBounceView] = [:]
     let disposeBag = DisposeBag()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+    }
+    
     func bindViewModel() {
         bindViewAction()
         bindState()
+        bindButtons()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -99,7 +108,9 @@ extension HeartBounceViewController {
                 }
                 switch $0 {
                 case .idle:
-                    self.displayGameStateLabel.text = "Wait"
+                    self.displayGameStateLabel.isHidden = false
+                    self.finishAndRestartView.isHidden = true
+                    self.displayGameStateLabel.text = "Wait..."
                 case .wait:
                     self.viewModel.fingerEnterTimer.countDown
                         .subscribe(onNext: { countDown in
@@ -111,9 +122,18 @@ extension HeartBounceViewController {
                     self.displayGameStateLabel.text = "Start"
                     Vibration.medium.vibrate()
                 case .ended:
-                    self.displayGameStateLabel.text = "Finish"
+                    self.displayGameStateLabel.isHidden = true
+                    self.finishAndRestartView.isHidden = false
                     Vibration.heavy.vibrate()
                 }
+            }).disposed(by: disposeBag)
+    }
+    
+    private func bindButtons() {
+        restartButton.rx.tap
+            .throttle(0.5, latest: true, scheduler: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] in
+                self?.viewModel.restart()
             }).disposed(by: disposeBag)
     }
 }
@@ -145,4 +165,3 @@ extension HeartBounceViewController {
         }
     }
 }
-
