@@ -31,7 +31,7 @@ class HeartBounceViewModel {
     let fingers = Variable<[Finger]>([])
     let state = Variable<State>(.idle)
     let fingerProducer = FingerProducer()
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     let fingerEnterTimer = SecondCountDownTimer(from: 3, to: 0)
     var fingerLeaveTimer: MilliSecondCountDownTimer?
     
@@ -102,6 +102,11 @@ class HeartBounceViewModel {
     }
     
     func restart() {
+        fingers.value.removeAll()
+        state.value = .idle
+        disposeBag = DisposeBag()
+        leavedFingersProxy.removeAll()
+        
         fingerEnterTimer.countDown
             .subscribe(onNext: { [weak self] count in
                 guard let `self` = self else {

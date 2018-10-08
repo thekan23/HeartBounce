@@ -111,6 +111,7 @@ extension HeartBounceViewController {
                     self.displayGameStateLabel.isHidden = false
                     self.finishAndRestartView.isHidden = true
                     self.displayGameStateLabel.text = "Wait..."
+                    self.clear()
                 case .wait:
                     self.viewModel.fingerEnterTimer.countDown
                         .subscribe(onNext: { countDown in
@@ -142,7 +143,7 @@ extension HeartBounceViewController {
     private func configureFingerIndicator(_ finger: Finger) -> HeartBounceView {
         let frameSize = CGSize(width: 120, height: 120)
         let fingerIndicator = HeartBounceView(color: finger.color)
-        view.addSubview(fingerIndicator)
+        surfaceView.addSubview(fingerIndicator)
         fingerIndicator.snp.makeConstraints {
             $0.size.equalTo(frameSize)
             $0.center.equalTo(finger.currentPoint)
@@ -163,5 +164,12 @@ extension HeartBounceViewController {
                 indicator.removeFromSuperview()
             }
         }
+    }
+    
+    private func clear() {
+        self.fingerIndicatorMap
+            .map { $0.value }
+            .forEach { $0.removeFromSuperview() }
+        self.fingerIndicatorMap.removeAll()
     }
 }
