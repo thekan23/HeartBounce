@@ -9,14 +9,16 @@
 import UIKit
 import RxSwift
 import SnapKit
+import NVActivityIndicatorView
 
 class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
     
     @IBOutlet weak var surfaceView: UIView!
+    @IBOutlet weak var displayGameStateLabel: UILabel!
     
     var viewModel: HeartBounceViewModel!
-    var fingerIndicatorMap: [String: UIView] = [:]
+    var fingerIndicatorMap: [String: HeartBounceView] = [:]
     let disposeBag = DisposeBag()
     
     func bindViewModel() {
@@ -60,6 +62,7 @@ extension HeartBounceViewController {
                 switch $0 {
                 case .createFinger(let finger):
                     let indicator = self.configureFingerIndicator(finger)
+                    indicator.startAnimating()
                     self.fingerIndicatorMap[finger.identifier] = indicator
                 case .updateFingerPositions:
                     self.fingerIndicatorMap.forEach { identifier, view in
@@ -74,101 +77,72 @@ extension HeartBounceViewController {
                     guard let indicator = self.fingerIndicatorMap.removeValue(forKey: finger.identifier) else {
                         return
                     }
+                    indicator.stopAnimation()
                     indicator.removeFromSuperview()
                 case .leaveFingerWithOrder(let finger):
-                    guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
+                    guard let indicator = self.fingerIndicatorMap.removeValue(forKey: finger.identifier) else {
                         return
                     }
+                    indicator.stopAnimation()
                     indicator.removeFromSuperview()
-                    
-                    let order = self.viewModel.numberOfLeavedFingers
-                    let leaveIndicator = self.configureLeaveIndicator(finger, order: order)
-                    self.fingerIndicatorMap[finger.identifier] = leaveIndicator
                 case .indicateCaughtFingers:
-                    let caughtFingers = self.viewModel.caughtFingers
-                    for finger in caughtFingers {
-                        guard let indicator = self.fingerIndicatorMap[finger.identifier] else {
-                            continue
-                        }
-                        indicator.removeFromSuperview()
-                        
-                        let caughtIndicator = self.configureCaughtFinger(finger)
-                        self.fingerIndicatorMap[finger.identifier] = caughtIndicator
-                    }
+                    self.removeAllExceptCaughtFingers()
                 }
             }).disposed(by: disposeBag)
     }
     
     private func bindState() {
         viewModel.state.asObservable()
-            .subscribe(onNext: {
+            .subscribe(onNext: { [weak self] in
+                guard let self = self else {
+                    return
+                }
                 switch $0 {
                 case .idle:
-                    print("idle")
+                    self.displayGameStateLabel.text = "Wait"
                 case .wait:
-                    print("wait")
+                    self.viewModel.fingerEnterTimer.countDown
+                        .subscribe(onNext: { countDown in
+                            if self.viewModel.state.value == .wait {
+                                self.displayGameStateLabel.text = String(countDown)
+                            }
+                        }).disposed(by: self.disposeBag)
                 case .progress:
+                    self.displayGameStateLabel.text = "Start"
                     Vibration.medium.vibrate()
-                    print("progress")
                 case .ended:
+                    self.displayGameStateLabel.text = "Finish"
                     Vibration.heavy.vibrate()
-                    print("ended")
                 }
             }).disposed(by: disposeBag)
     }
-    
-    private func configureFingerIndicator(_ finger: Finger) -> UIView {
-        let size = CGSize(width: 80, height: 80)
-        let fingerIndicator = UIView()
-        fingerIndicator.backgroundColor = finger.color
-        fingerIndicator.layer.cornerRadius = size.width / 2
-        fingerIndicator.layer.masksToBounds = true
+}
+
+extension HeartBounceViewController {
+    private func configureFingerIndicator(_ finger: Finger) -> HeartBounceView {
+        let frameSize = CGSize(width: 120, height: 120)
+        let fingerIndicator = HeartBounceView(color: finger.color)
         view.addSubview(fingerIndicator)
         fingerIndicator.snp.makeConstraints {
-            $0.size.equalTo(size)
+            $0.size.equalTo(frameSize)
             $0.center.equalTo(finger.currentPoint)
         }
         return fingerIndicator
     }
     
-    private func configureLeaveIndicator(_ finger: Finger, order: Int) -> UIView {
-        let size = CGSize(width: 80, height: 80)
-        let leaveIndicator = UIView()
-        leaveIndicator.backgroundColor = finger.color
-        leaveIndicator.layer.cornerRadius = size.width / 2
-        leaveIndicator.layer.masksToBounds = true
-        view.addSubview(leaveIndicator)
-        leaveIndicator.snp.makeConstraints {
-            $0.size.equalTo(size)
-            $0.center.equalTo(finger.currentPoint)
+    private func removeAllExceptCaughtFingers() {
+        let caughtFingers = self.viewModel.caughtFingers
+        for (key, indicator) in self.fingerIndicatorMap {
+            var isMatched = false
+            for caughtFinger in caughtFingers {
+                if caughtFinger.identifier == key {
+                    isMatched = true
+                }
+            }
+            if !isMatched {
+                indicator.removeFromSuperview()
+            }
         }
-        let orderLabel = UILabel()
-        orderLabel.attributedText = NSAttributedString(string: "\(order)")
-        leaveIndicator.addSubview(orderLabel)
-        orderLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        return leaveIndicator
-    }
-    
-    private func configureCaughtFinger(_ finger: Finger) -> UIView {
-        let size = CGSize(width: 80, height: 80)
-        let leaveIndicator = UIView()
-        leaveIndicator.backgroundColor = finger.color
-        leaveIndicator.layer.cornerRadius = size.width / 2
-        leaveIndicator.layer.masksToBounds = true
-        view.addSubview(leaveIndicator)
-        leaveIndicator.snp.makeConstraints {
-            $0.size.equalTo(size)
-            $0.center.equalTo(finger.currentPoint)
-        }
-        let orderLabel = UILabel()
-        orderLabel.attributedText = NSAttributedString(string: "Caught")
-        leaveIndicator.addSubview(orderLabel)
-        orderLabel.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        return leaveIndicator
     }
 }
 
