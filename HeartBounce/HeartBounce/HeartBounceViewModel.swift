@@ -31,7 +31,7 @@ class HeartBounceViewModel {
     let fingers = Variable<[Finger]>([])
     let state = Variable<State>(.idle)
     let fingerProducer = FingerProducer()
-    let disposeBag = DisposeBag()
+    var disposeBag = DisposeBag()
     let fingerEnterTimer = SecondCountDownTimer(from: 3, to: 0)
     var fingerLeaveTimer: MilliSecondCountDownTimer?
     
@@ -54,22 +54,7 @@ class HeartBounceViewModel {
     }
     
     init() {
-        fingerEnterTimer.countDown
-            .subscribe(onNext: { [weak self] count in
-                guard let `self` = self else {
-                    return
-                }
-                guard self.state.value == .wait else {
-                    return
-                }
-                if count == 0 {
-                    if self.numberOfFingers > 0 {
-                        self.state.value = .progress
-                    } else {
-                        self.state.value = .idle
-                    }
-                }
-            }).disposed(by: disposeBag)
+        restart()
     }
     
     func fingerForIdentifier(_ identifier: String) -> Finger? {
@@ -114,6 +99,30 @@ class HeartBounceViewModel {
         default:
             break
         }
+    }
+    
+    func restart() {
+        fingers.value.removeAll()
+        state.value = .idle
+        disposeBag = DisposeBag()
+        leavedFingersProxy.removeAll()
+        
+        fingerEnterTimer.countDown
+            .subscribe(onNext: { [weak self] count in
+                guard let `self` = self else {
+                    return
+                }
+                guard self.state.value == .wait else {
+                    return
+                }
+                if count == 0 {
+                    if self.numberOfFingers > 0 {
+                        self.state.value = .progress
+                    } else {
+                        self.state.value = .idle
+                    }
+                }
+            }).disposed(by: disposeBag)
     }
     
     private func handleFingerLeaveWhenWait(_ identifier: String) {

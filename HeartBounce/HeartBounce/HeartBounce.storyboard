@@ -34,12 +34,50 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="text" value=""/>
                                         </userDefinedRuntimeAttributes>
                                     </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ko6-Nd-SaP">
+                                        <rect key="frame" x="30" y="180" width="315" height="128"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Finish" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Y4-M4-ePI">
+                                                <rect key="frame" x="30" y="10" width="255" height="26.5"/>
+                                                <fontDescription key="fontDescription" name="FiraSans-Bold" family="Fira Sans" pointSize="22"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap here to restart" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qHh-dm-iyO">
+                                                <rect key="frame" x="30" y="38.5" width="255" height="22"/>
+                                                <fontDescription key="fontDescription" name="FiraSans-Bold" family="Fira Sans" pointSize="18"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6o-Fi-UbQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="315" height="128"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="9Y4-M4-ePI" firstAttribute="top" secondItem="ko6-Nd-SaP" secondAttribute="top" constant="10" id="2g9-fO-fgW"/>
+                                            <constraint firstItem="qHh-dm-iyO" firstAttribute="trailing" secondItem="9Y4-M4-ePI" secondAttribute="trailing" id="Cku-Kh-Wxp"/>
+                                            <constraint firstAttribute="trailing" secondItem="p6o-Fi-UbQ" secondAttribute="trailing" id="Djm-9q-6v0"/>
+                                            <constraint firstAttribute="height" constant="128" id="Jco-e7-yIm"/>
+                                            <constraint firstItem="p6o-Fi-UbQ" firstAttribute="top" secondItem="ko6-Nd-SaP" secondAttribute="top" id="ORa-GB-VRI"/>
+                                            <constraint firstAttribute="bottom" secondItem="p6o-Fi-UbQ" secondAttribute="bottom" id="U4M-ju-G11"/>
+                                            <constraint firstItem="qHh-dm-iyO" firstAttribute="top" secondItem="9Y4-M4-ePI" secondAttribute="bottom" constant="2" id="dNZ-tY-GOW"/>
+                                            <constraint firstItem="qHh-dm-iyO" firstAttribute="leading" secondItem="9Y4-M4-ePI" secondAttribute="leading" id="dzr-j1-Zmx"/>
+                                            <constraint firstAttribute="trailing" secondItem="9Y4-M4-ePI" secondAttribute="trailing" constant="30" id="np6-t2-Ieb"/>
+                                            <constraint firstItem="p6o-Fi-UbQ" firstAttribute="leading" secondItem="ko6-Nd-SaP" secondAttribute="leading" id="tuR-wS-reC"/>
+                                            <constraint firstItem="9Y4-M4-ePI" firstAttribute="leading" secondItem="ko6-Nd-SaP" secondAttribute="leading" constant="30" id="zCR-1U-NzK"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="ko6-Nd-SaP" secondAttribute="trailing" constant="30" id="1yw-1j-egZ"/>
                                     <constraint firstItem="fmR-Kg-Alr" firstAttribute="leading" secondItem="ddB-hi-qaP" secondAttribute="leading" constant="30" id="3nV-r2-SPu"/>
                                     <constraint firstAttribute="trailing" secondItem="fmR-Kg-Alr" secondAttribute="trailing" constant="30" id="6U2-DE-5KI"/>
+                                    <constraint firstItem="ko6-Nd-SaP" firstAttribute="leading" secondItem="ddB-hi-qaP" secondAttribute="leading" constant="30" id="FLz-E5-c1O"/>
                                     <constraint firstItem="fmR-Kg-Alr" firstAttribute="top" secondItem="ddB-hi-qaP" secondAttribute="top" constant="20" id="QA7-jb-4jN"/>
+                                    <constraint firstItem="ko6-Nd-SaP" firstAttribute="top" secondItem="ddB-hi-qaP" secondAttribute="top" constant="180" id="qV3-ys-WaO"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -54,6 +92,8 @@
                     </view>
                     <connections>
                         <outlet property="displayGameStateLabel" destination="fmR-Kg-Alr" id="GcV-Au-xyB"/>
+                        <outlet property="finishAndRestartView" destination="ko6-Nd-SaP" id="hGA-Yo-IxR"/>
+                        <outlet property="restartButton" destination="p6o-Fi-UbQ" id="XoC-hQ-2Ho"/>
                         <outlet property="surfaceView" destination="ddB-hi-qaP" id="V9c-qf-42C"/>
                     </connections>
                 </viewController>
