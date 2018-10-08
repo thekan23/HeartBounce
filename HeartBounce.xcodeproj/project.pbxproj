@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		FC42C2A3216B944C006DA18C /* NVActivityIndicatorView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC42C2A2216B944C006DA18C /* NVActivityIndicatorView.framework */; };
+		FC42C2A7216B988E006DA18C /* HeartBounceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC42C2A6216B988E006DA18C /* HeartBounceView.swift */; };
 		FC5501742155593E00B05056 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501732155593E00B05056 /* AppDelegate.swift */; };
 		FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5501752155593E00B05056 /* HeartBounceViewController.swift */; };
 		FC5501792155593E00B05056 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC5501772155593E00B05056 /* Main.storyboard */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		FC42C2A2216B944C006DA18C /* NVActivityIndicatorView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NVActivityIndicatorView.framework; path = Carthage/Build/iOS/NVActivityIndicatorView.framework; sourceTree = "<group>"; };
+		FC42C2A6216B988E006DA18C /* HeartBounceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceView.swift; sourceTree = "<group>"; };
 		FC5501702155593E00B05056 /* HeartBounce.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartBounce.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC5501732155593E00B05056 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FC5501752155593E00B05056 /* HeartBounceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceViewController.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 				FC5501752155593E00B05056 /* HeartBounceViewController.swift */,
 				FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */,
 				FCF9B75D215796A000807ADC /* Finger.swift */,
+				FC42C2A6216B988E006DA18C /* HeartBounceView.swift */,
 			);
 			path = HeartBounce;
 			sourceTree = "<group>";
@@ -240,6 +243,7 @@
 				FCF9B76B215A9E1C00807ADC /* Vibration.swift in Sources */,
 				FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */,
 				FCF9B7572157902600807ADC /* Bindable.swift in Sources */,
+				FC42C2A7216B988E006DA18C /* HeartBounceView.swift in Sources */,
 				FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */,
 				FCF9B7672158BADA00807ADC /* SecondCountDownTimer.swift in Sources */,
 				FC5501762155593E00B05056 /* HeartBounceViewController.swift in Sources */,

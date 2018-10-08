@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import SnapKit
+import NVActivityIndicatorView
 
 class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
@@ -60,6 +61,7 @@ extension HeartBounceViewController {
                 switch $0 {
                 case .createFinger(let finger):
                     let indicator = self.configureFingerIndicator(finger)
+                    indicator.startAnimating()
                     self.fingerIndicatorMap[finger.identifier] = indicator
                 case .updateFingerPositions:
                     self.fingerIndicatorMap.forEach { identifier, view in
@@ -117,15 +119,11 @@ extension HeartBounceViewController {
             }).disposed(by: disposeBag)
     }
     
-    private func configureFingerIndicator(_ finger: Finger) -> UIView {
-        let size = CGSize(width: 80, height: 80)
-        let fingerIndicator = UIView()
-        fingerIndicator.backgroundColor = finger.color
-        fingerIndicator.layer.cornerRadius = size.width / 2
-        fingerIndicator.layer.masksToBounds = true
+    private func configureFingerIndicator(_ finger: Finger) -> HeartBounceView {
+        let fingerIndicator = HeartBounceView(color: finger.color)
         view.addSubview(fingerIndicator)
         fingerIndicator.snp.makeConstraints {
-            $0.size.equalTo(size)
+            $0.size.equalTo(HeartBounceView.externalFrame.size)
             $0.center.equalTo(finger.currentPoint)
         }
         return fingerIndicator
