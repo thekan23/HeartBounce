@@ -24,11 +24,6 @@ class HeartBounceViewController: UIViewController, Bindable {
     var fingerIndicatorMap: [String: HeartBounceView] = [:]
     let disposeBag = DisposeBag()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     func bindViewModel() {
         bindViewAction()
         bindState()
@@ -36,6 +31,9 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard touches.count < 5 else {
+            return
+        }
         for t in touches {
             let location = t.location(in: view)
             viewModel.requestAppendFinger(at: location, with: t.identifier)
@@ -58,7 +56,10 @@ class HeartBounceViewController: UIViewController, Bindable {
             viewModel.leaveFinger(with: t.identifier)
         }
     }
-
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        viewModel.restart()
+    }
 }
 
 extension HeartBounceViewController {
