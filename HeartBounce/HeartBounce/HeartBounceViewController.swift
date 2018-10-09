@@ -25,6 +25,11 @@ class HeartBounceViewController: UIViewController, Bindable {
     var fingerIndicatorMap: [String: HeartBounceView] = [:]
     let disposeBag = DisposeBag()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        displayGameStateLabel.findConstraint(for: .top)?.constant = UIWindow.hasNotch ? 40 : 20
+    }
+    
     func bindViewModel() {
         bindViewAction()
         bindState()
