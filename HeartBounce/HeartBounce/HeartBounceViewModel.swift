@@ -116,7 +116,7 @@ class HeartBounceViewModel {
                     return
                 }
                 if count == 0 {
-                    if self.numberOfFingers > 0 {
+                    if self.numberOfFingers > 1 {
                         self.state.value = .progress
                     } else {
                         self.state.value = .idle
