@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 import RxCocoa
 import NVActivityIndicatorView
+import Toaster
 
 class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
@@ -24,11 +25,6 @@ class HeartBounceViewController: UIViewController, Bindable {
     var fingerIndicatorMap: [String: HeartBounceView] = [:]
     let disposeBag = DisposeBag()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-    
     func bindViewModel() {
         bindViewAction()
         bindState()
@@ -36,6 +32,9 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard touches.count < 5 else {
+            return
+        }
         for t in touches {
             let location = t.location(in: view)
             viewModel.requestAppendFinger(at: location, with: t.identifier)
@@ -58,7 +57,11 @@ class HeartBounceViewController: UIViewController, Bindable {
             viewModel.leaveFinger(with: t.identifier)
         }
     }
-
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Toast(text: "Only 5 or fewer fingers are allowed").show()
+        viewModel.restart()
+    }
 }
 
 extension HeartBounceViewController {
@@ -110,13 +113,14 @@ extension HeartBounceViewController {
                 case .idle:
                     self.displayGameStateLabel.isHidden = false
                     self.finishAndRestartView.isHidden = true
-                    self.displayGameStateLabel.text = "Wait..."
+                    self.displayGameStateLabel.text = "Put your finger on the screen"
                     self.clear()
                 case .wait:
                     self.viewModel.fingerEnterTimer.countDown
-                        .subscribe(onNext: { countDown in
+                        .map { self.configureLeftCountDownAttributedText(leftSeconds: $0) }
+                        .subscribe(onNext: {
                             if self.viewModel.state.value == .wait {
-                                self.displayGameStateLabel.text = String(countDown)
+                                self.displayGameStateLabel.attributedText = $0
                             }
                         }).disposed(by: self.disposeBag)
                 case .progress:
@@ -136,6 +140,24 @@ extension HeartBounceViewController {
             .subscribe(onNext: { [weak self] in
                 self?.viewModel.restart()
             }).disposed(by: disposeBag)
+    }
+}
+
+extension HeartBounceViewController {
+    private func configureLeftCountDownAttributedText(leftSeconds: Int) -> NSAttributedString {
+        let messageAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.firaSansBoldFont(size: 18),
+            .foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        ]
+        let countDownAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.firaSansBoldFont(size: 18),
+            .foregroundColor: #colorLiteral(red: 1, green: 0.2745098039, blue: 0.2745098039, alpha: 1)
+        ]
+        let attributedString = NSMutableAttributedString()
+        attributedString.append(NSAttributedString(string: "Starts in", attributes: messageAttributes))
+        attributedString.append(NSAttributedString(string: " \(leftSeconds) ", attributes: countDownAttributes))
+        attributedString.append(NSAttributedString(string: "seconds", attributes: messageAttributes))
+        return attributedString
     }
 }
 
