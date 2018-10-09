@@ -11,6 +11,7 @@ import RxSwift
 import SnapKit
 import RxCocoa
 import NVActivityIndicatorView
+import Toaster
 
 class HeartBounceViewController: UIViewController, Bindable {
     typealias ViewModelType = HeartBounceViewModel
@@ -58,6 +59,7 @@ class HeartBounceViewController: UIViewController, Bindable {
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        Toast(text: "Only 5 or fewer fingers are allowed").show()
         viewModel.restart()
     }
 }

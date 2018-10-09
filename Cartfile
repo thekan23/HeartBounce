@@ -1,4 +1,4 @@
 github "ReactiveX/RxSwift" ~> 4.2
 github "SnapKit/SnapKit" ~> 4.0
 github "ninjaprox/NVActivityIndicatorView"
-github "shin8484/PopupWindow"
+github "devxoul/Toaster"

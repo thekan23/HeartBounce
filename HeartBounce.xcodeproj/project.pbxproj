@@ -20,7 +20,7 @@
 		FCF130E6216BCEAB00998B9C /* UIFont+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF130E5216BCEAB00998B9C /* UIFont+Extension.swift */; };
 		FCF130E8216BD3BD00998B9C /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF130E7216BD3BD00998B9C /* UIView+Extension.swift */; };
 		FCF130EA216BD6F400998B9C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF130E9216BD6F400998B9C /* RxCocoa.framework */; };
-		FCF130EC216CCCFB00998B9C /* PopupWindow.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF130EB216CCCFB00998B9C /* PopupWindow.framework */; };
+		FCF130EE216D057A00998B9C /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF130ED216D057A00998B9C /* Toaster.framework */; };
 		FCF9B75421578F8800807ADC /* HeartBounceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */; };
 		FCF9B7572157902600807ADC /* Bindable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B7562157902600807ADC /* Bindable.swift */; };
 		FCF9B75A215791FC00807ADC /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9B759215791FC00807ADC /* RootViewController.swift */; };
@@ -51,6 +51,7 @@
 		FCF130E7216BD3BD00998B9C /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		FCF130E9216BD6F400998B9C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		FCF130EB216CCCFB00998B9C /* PopupWindow.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PopupWindow.framework; path = Carthage/Build/iOS/PopupWindow.framework; sourceTree = "<group>"; };
+		FCF130ED216D057A00998B9C /* Toaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Toaster.framework; path = Carthage/Build/iOS/Toaster.framework; sourceTree = "<group>"; };
 		FCF9B75321578F8800807ADC /* HeartBounceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartBounceViewModel.swift; sourceTree = "<group>"; };
 		FCF9B7562157902600807ADC /* Bindable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bindable.swift; sourceTree = "<group>"; };
 		FCF9B759215791FC00807ADC /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -69,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCF130EC216CCCFB00998B9C /* PopupWindow.framework in Frameworks */,
+				FCF130EE216D057A00998B9C /* Toaster.framework in Frameworks */,
 				FCF130EA216BD6F400998B9C /* RxCocoa.framework in Frameworks */,
 				FC42C2A3216B944C006DA18C /* NVActivityIndicatorView.framework in Frameworks */,
 				FC55018921555CDF00B05056 /* SnapKit.framework in Frameworks */,
@@ -133,6 +134,7 @@
 		FC55018521555CD100B05056 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FCF130ED216D057A00998B9C /* Toaster.framework */,
 				FCF130EB216CCCFB00998B9C /* PopupWindow.framework */,
 				FCF130E9216BD6F400998B9C /* RxCocoa.framework */,
 				FC42C2A2216B944C006DA18C /* NVActivityIndicatorView.framework */,
@@ -259,7 +261,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NVActivityIndicatorView.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/PopupWindow.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Toaster.framework",
 			);
 			outputFileListPaths = (
 			);
